@@ -1,0 +1,25 @@
+<div id="welcome">
+<h1>retweet?</h1>
+
+content: 
+<br>
+<table class="table table-striped table-hover ">
+  <tr class="info">
+      <td><%= @retweet_find.content %></td>
+  </tr>
+</table>
+
+<%= form_for(@retweet, url: tweet_retweets_path) do |f| %>
+	<%= f.hidden_field :tweet_id, :value => params[:tweet_id] %>
+	<%= f.hidden_field :t_id, :value => @retweet_find.user_id %>
+	<%= f.hidden_field :content, :value => @retweet_find.content %>
+	<%= f.hidden_field :user_id, :value => current_user.user_id %>
+	
+	<input class="btn btn-info" type="submit" value="retweet !">
+<% end %>
+<br>
+<%= link_to tweets_path, class: "btn btn-default" do %>
+    Back
+<% end %>
+ </div>
+ 

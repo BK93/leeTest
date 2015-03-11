@@ -1,0 +1,14 @@
+<div id="signUp">
+<h1>like?</h1>
+
+<%= form_for(@like, url: tweet_likes_path) do |f| %>
+	<%= f.hidden_field :tweet_id, :value => params[:tweet_id] %>
+	<br>
+	
+    <input class="btn btn-primary" type="submit" value="LIKE !">
+	<%= link_to :back, class: "btn btn-default" do %>
+    Back
+    <% end %>
+<% end %>
+
+</div>
