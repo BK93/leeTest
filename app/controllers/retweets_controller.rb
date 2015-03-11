@@ -14,7 +14,7 @@ class RetweetsController < ApplicationController
     @retweet = Retweet.new(retweet_params)
 
 	if @retweet.save
-	  PostMailer.post_mail.deliver
+	  # PostMailer.post_mail.deliver
       
 	  redirect_to tweets_path
     else
