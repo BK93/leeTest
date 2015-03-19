@@ -11,23 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224104447) do
+ActiveRecord::Schema.define(version: 20150319132141) do
 
   create_table "likes", force: :cascade do |t|
     t.integer  "tweet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
   add_index "likes", ["tweet_id"], name: "index_likes_on_tweet_id"
 
   create_table "retweets", force: :cascade do |t|
     t.integer  "tweet_id"
-    t.string   "t_id"
+    t.string   "tweet_user_id"
     t.string   "content"
-    t.string   "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "image"
+    t.string   "comment"
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -35,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150224104447) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "user_id"
+    t.string   "image"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,7 +54,6 @@ ActiveRecord::Schema.define(version: 20150224104447) do
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_id"
     t.string   "image"
   end
 

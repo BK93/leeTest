@@ -3,11 +3,13 @@
 
 <%= form_for(@like, url: tweet_likes_path) do |f| %>
 	<%= f.hidden_field :tweet_id, :value => params[:tweet_id] %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
 	<br>
 	
     <input class="btn btn-primary" type="submit" value="LIKE !">
-	<%= link_to :back, class: "btn btn-default" do %>
-    Back
+	
+	<%= link_to tweet_path(params[:tweet_id]), class: "btn btn-default" do %>
+       Back	
     <% end %>
 <% end %>
 

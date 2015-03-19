@@ -15,11 +15,19 @@ class TweetsController < ApplicationController
   
   def create
     @tweet = Tweet.new(tweet_params)
+	
 	if @tweet.save
-	  redirect_to tweets_path
+	  redirect_to tweets_path, notice: 'tweetが追加されました！'
 	else
 	  render 'new'
 	end
+  end
+  
+  def destroy
+    @tweet = Tweet.find(params[:id])
+	@tweet.destroy
+	
+	redirect_to tweets_path
   end
   
   def update
@@ -35,7 +43,7 @@ class TweetsController < ApplicationController
   private
    
     def tweet_params
-	  params[:tweet].permit(:content, :user_id)
+	  params[:tweet].permit(:content, :user_id, :image)
 	end
 	
 	#필터링(project의 title만)을 해주고 

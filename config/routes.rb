@@ -5,10 +5,7 @@ Rails.application.routes.draw do
 
   resources :tweets do 
     resources :retweets
-  end
- 
-  resources :tweets do 
-    resources :likes
+	resources :likes
   end
   
   root 'welcome#index'

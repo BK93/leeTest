@@ -1,5 +1,5 @@
 
-<h1>retweet?</h1>
+<h1>retweet???????????</h1>
 (retweets_show_thml)<br>
 <br>
 
@@ -13,10 +13,11 @@ user_id:<%= current_user.user_id %><br>
 	
 <%= form_for @retweet, :url => {:action => 'update'} do |f| %>
 	<%= f.hidden_field :tweet_id, :value => @retweet.id %>
-	<%= f.hidden_field :t_id, :value => @retweet.user_id %>
+	<%= f.hidden_field :tweet_user_id, :value => @retweet.user_id %>
 	<%= f.hidden_field :content, :value => @retweet.content %>
 	<%= f.hidden_field :user_id, :value => current_user.user_id %>
 	<br>
 	<%= f.submit 'YES' %>
+	
+    <%= link_to "NO", tweets_path %>
 <% end %>
-<%= link_to "NO", tweets_path %>

@@ -1,5 +1,9 @@
 class LikesController < ApplicationController
 
+  def index
+    redirect_to new_tweet_like_path(params[:tweet_id])
+  end
+
   def new
 	@like = Like.new 
 	@like_find = Tweet.find(params[:tweet_id])
@@ -11,13 +15,16 @@ class LikesController < ApplicationController
 	if @like.save
 	  redirect_to tweets_path
     else
-	  render :action => “new”
+	  flash.now[:notice] = "もう LIKE しました"
+	  render 'new'
+	  # render :action => "new"
+	  # render :template => "tweets/show"
 	end
   end
   
   private
   
     def like_params
-	  params.require(:like).permit(:tweet_id)
+	  params.require(:like).permit(:tweet_id, :user_id)
 	end
 end
