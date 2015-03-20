@@ -37,6 +37,15 @@
 		<%= retweet.comment %>
 	  </td>
 	  <td>
+	  <% if current_user.id == retweet.tweet_user_id.to_i %>
+		  zzzzzzz.
+		  <% else %>
+		  aaaaaaa.
+		  <% end %>
+		  <br>
+		  <%= retweet.tweet_user_id %>
+		  <br>
+		  <%= current_user.id %>
 		<%= link_to tweet_retweet_path(retweet.tweet_id, retweet.id), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } do %>
 	      Delete
 		<% end %>
