@@ -1,0 +1,21 @@
+<div id="welcome">
+<h1>tweet now</h1>
+
+<%= form_for @tweet do |f| %>
+
+<p>
+  <%= f.text_field :content %>
+  <%= f.hidden_field :user_id, :value => current_user.user_id %>
+  <% if @tweet.errors.any? %>
+  <%= @tweet.errors.messages[:content][0] %>
+  <% end %>
+</p>
+
+  <input class="btn btn-primary" name="commit" type="submit" value="tweet">  
+	<%= link_to tweets_path, class: "btn btn-default" do %>
+		Back
+	<% end %>
+<% end %>
+
+
+</div>

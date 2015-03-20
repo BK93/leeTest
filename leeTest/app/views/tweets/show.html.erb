@@ -1,0 +1,24 @@
+<div id="signUp">
+content:
+<br>
+<h1><%= @tweet.content %></h1>
+
+<br>	
+<%= link_to new_tweet_like_path(@tweet), class: "btn btn-primary" do %>
+    LIKE
+	<span class="badge"><%= @tweet.likes.count %></span>
+<% end %> 
+&nbsp;
+
+<%= link_to new_tweet_retweet_path(@tweet), class: "btn btn-info" do %>
+    retweet
+<% end %>
+&nbsp;
+
+<%= link_to tweets_path, class: "btn btn-default" do %>
+    Back
+<% end %>
+</div>
+
+
+
