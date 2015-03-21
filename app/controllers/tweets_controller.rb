@@ -1,8 +1,9 @@
 class TweetsController < ApplicationController
 
   def index
-    @tweets = Tweet.all
-	@retweets = Retweet.all
+    @tweets = Tweet.all 
+    # @retweets = Retweet.all
+    # @times = Tweet.all + Retweet.all
   end
 
   def show
@@ -17,7 +18,7 @@ class TweetsController < ApplicationController
     @tweet = Tweet.new(tweet_params)
 	
 	if @tweet.save
-	  redirect_to tweets_path, notice: 'tweetが追加されました！'
+	  redirect_to tweets_path, notice: 'tweet complete!'
 	else
 	  render 'new'
 	end
@@ -25,15 +26,15 @@ class TweetsController < ApplicationController
   
   def destroy
     @tweet = Tweet.find(params[:id])
-	@tweet.destroy
+    @tweet.destroy
 	
-	redirect_to tweets_path
+    redirect_to tweets_path
   end
   
   def update
     @tweet = Tweet.find(params[:id])
 	if @tweet.update(tweet_params)
-      redirect_to tweets_path
+    	  redirect_to tweets_path
 	else
 	  render 'new'
 	end
@@ -42,10 +43,7 @@ class TweetsController < ApplicationController
   
   private
    
-    def tweet_params
-	  params[:tweet].permit(:content, :user_id, :image)
-	end
-	
-	#필터링(project의 title만)을 해주고 
-	#create의 project_params로 넘겨준다
+   def tweet_params
+     params[:tweet].permit(:content, :user_id, :image)
+   end
 end

@@ -1,10 +1,6 @@
 class RetweetsController < ApplicationController
-  before_action :set_retweet, only: [:show, :update, :destroy]
+  before_action :set_retweet, only: [:update, :destroy]
 
-  def show
-   @retweet = Tweet.find(params[:id])
-  end
-  
   def new
 	@retweet = Retweet.new 
 	@retweet_find = Tweet.find(params[:tweet_id])
@@ -13,18 +9,18 @@ class RetweetsController < ApplicationController
   def create
     @retweet = Retweet.new(retweet_params)
 
-	if @retweet.save
-	  redirect_to tweets_path, notice: 'retweetが追加されました！'
+    if @retweet.save
+	  redirect_to tweets_path, notice: 'retweet complete!'
     else
 	  render 'new'
-	end
+    end
   end
    
   def destroy
     @retweet = Retweet.find(params[:id])
-	@retweet.destroy
+    @retweet.destroy
 	
-	redirect_to tweets_path
+    redirect_to tweets_path
   end
  
   
@@ -34,6 +30,6 @@ class RetweetsController < ApplicationController
     end
 	
     def retweet_params
-	  params.require(:retweet).permit(:tweet_id, :content, :tweet_user_id, :image, :comment)
-	end
+      params.require(:retweet).permit(:tweet_id, :content, :image, :comment)
+    end
 end
