@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
 
    before_action :configure_permitted_parameters, if: :devise_controller?
 
+   def after_sign_in_path_for(resource)
+     tweets_path
+   end
+   
     protected
       def configure_permitted_parameters
         devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:username, :user_id, :email, :password, :password_cofirmation, :remember_me, :image, :image_cache) } 

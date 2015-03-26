@@ -5,10 +5,21 @@ Rails.application.routes.draw do
 
   resources :tweets do 
     resources :retweets
-	resources :likes
+	resources :likes, only: [:create, :destroy]
+	resources :comments, only: [:new, :create, :destroy]
   end
   
   root 'welcome#index'
+
+    #member do
+	#  post 'like'
+	#  post 'unlike'
+	# end
+	# resources :likes, only: [:create, :destroy]
+	
+  # post '/tweets/:tweet_id/likes/:id/toggle' => 'likes#toggle'
+  
+  # root 'tweets#index'
 
   # Example of regular route:
   # get 'products/:id' => 'catalog#view'

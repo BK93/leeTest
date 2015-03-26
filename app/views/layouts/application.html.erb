@@ -8,13 +8,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+ 
 <header>
   <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">LeeTest</a>
 	
 	<% if user_signed_in? %>
+	  <%= link_to tweets_path, class: "navbar-brand" do %>
+        Main
+      <% end %>
+	 
 	  <div class="navbar-header">
 	    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
@@ -27,12 +30,16 @@
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
        <ul class="nav navbar-nav">
 	    <li>
-	      <%= link_to "twitter", tweets_path %> 
+	      <%= link_to "Notifications", "#" %> 
 		  <span class="sr-only">
 		    (current)
 		  </span>
 	    </li>
        
+			
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 		    <img alt="img" height="30" width="30" src="<%= current_user.image %>" />  
@@ -49,15 +56,12 @@
 			  <a><%= link_to "profile_update", edit_user_registration_path %></a>
 			</li>
 		  </ul>
-        </li>	
+        </li>
       </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "main", root_path %></li>
-      </ul>
-      </div>
+      </div> 
 		
 	<% else %>
+	<a class="navbar-brand" href="/">LeeTest</a>
 	<div class="navbar-header">
 	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>

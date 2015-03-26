@@ -1,6 +1,11 @@
 class RetweetsController < ApplicationController
   before_action :set_retweet, only: [:update, :destroy]
 
+  def show
+    @retweet = Retweet.new
+	@retweet_find = Tweet.find(params[:tweet_id])
+  end
+  
   def new
 	@retweet = Retweet.new 
 	@retweet_find = Tweet.find(params[:tweet_id])
@@ -30,6 +35,6 @@ class RetweetsController < ApplicationController
     end
 	
     def retweet_params
-      params.require(:retweet).permit(:tweet_id, :content, :image, :comment)
+      params.require(:retweet).permit(:tweet_id, :image, :username)
     end
 end

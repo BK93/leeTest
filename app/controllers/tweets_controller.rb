@@ -1,13 +1,17 @@
 class TweetsController < ApplicationController
 
   def index
-    @tweets = Tweet.all 
+    @tweets = Tweet.all.order("id DESC") 
     # @retweets = Retweet.all
     # @times = Tweet.all + Retweet.all
+	@tweet = Tweet.new
+	# @like = Like.new
+	
   end
 
-  def show
+  def show 
     @tweet = Tweet.find(params[:id])
+	@retweet = Retweet.new 
   end
   
   def new

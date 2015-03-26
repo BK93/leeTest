@@ -21,7 +21,12 @@
 #signUp{
   margin-left:5%;
 } 
-/* 
+
+/*
+#line{
+  display: inline-none;
+}
+ 
 ul{
    list-style:none;
    padding-left:0px;
