@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     resources :retweets
 	resources :likes, only: [:create, :destroy]
 	resources :comments, only: [:new, :create, :destroy]
+	resources :follows, only: [:create, :destroy]
   end
+  
+  
+  #resources :follows
   
   root 'welcome#index'
 

@@ -4,7 +4,12 @@
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:multipart => true}) do |f| %>
   <%= devise_error_messages! %>
-
+  
+  <div class="field">
+    <%= f.label :id %><br />
+    <%= f.text_field :userId %>
+  </div>
+  
   <div>
     <%= f.label :name %><br />
     <%= f.text_field :username %>

@@ -10,7 +10,6 @@ class LikesController < ApplicationController
   end
   
   def destroy
-  
     Like.where(tweet_id: @tweet.id, user_id: current_user.id).first.destroy
     redirect_to tweets_path
   end

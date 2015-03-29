@@ -34,10 +34,8 @@
 		  <span class="sr-only">
 		    (current)
 		  </span>
-	    </li>
-       
-			
-      </ul>
+	    </li>			
+       </ul>
       
       <ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
@@ -61,7 +59,7 @@
       </div> 
 		
 	<% else %>
-	<a class="navbar-brand" href="/">LeeTest</a>
+	<a class="navbar-brand" href="/">Main</a>
 	<div class="navbar-header">
 	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -81,10 +79,6 @@
 		  <%= link_to "Sign up", new_user_registration_path %>
 		</li>
       </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "main", root_path %></li>
-      </ul>
     </div>
 	<% end %>
 	
@@ -99,7 +93,21 @@
   </div>
 <% end %>
 
-<%= yield %>
+<div class="row">
+	<div class="container">
+		<div class="col-md-3 sidebar_left">
+			<%= yield :sidebar_left %>
+		</div>
+
+		<div class="col-md-6 content">
+			<%= yield %>
+		</div>
+		
+		<div class="col-md-3" sidebar_right >
+			<%= yield :sidebar_right %>
+		</div>
+	</div>
+</div>
 
 </body>
 </html>

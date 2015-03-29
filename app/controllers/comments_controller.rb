@@ -24,11 +24,10 @@ class CommentsController < ApplicationController
 	
     redirect_to tweets_path
   end
- 
-  
+
   private
 	
     def comment_params
-      params.require(:comment).permit(:tweet_id, :username, :image, :comment)
+      params.require(:comment).permit(:tweet_id, :username, :image, :comment, :user_id)
     end
 end

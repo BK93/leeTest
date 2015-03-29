@@ -13,6 +13,9 @@
 
 	<%= f.hidden_field :tweet_id, :value => params[:tweet_id] %>
 	<%= f.hidden_field :image, :value => current_user.image %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>	
+	<%= f.hidden_field :username, :value => current_user.username %>
+	<%= f.hidden_field :content, :value => @retweet_find.content %>
 
 	<input class="btn btn-info" type="submit" value="retweet !">
 
