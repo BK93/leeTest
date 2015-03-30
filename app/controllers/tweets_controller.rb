@@ -20,12 +20,12 @@ class TweetsController < ApplicationController
 		  @tweets_hash.store(retweet.created_at, retweet)
 		end
 		
-		@tweets_hash = @tweets_hash.sort_by{|key, val| key}
+		@tweets_hash = @tweets_hash.sort_by{|key, val| key}.reverse!
 		
 		Hash[@tweets_hash].values.each do |obj|
 		p obj
+		end
 		
-	end
 	  end
 
 	  def show 

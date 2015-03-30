@@ -25,7 +25,7 @@ class RetweetsController < ApplicationController
     @retweet = Retweet.find(params[:id])
     @retweet.destroy
 	
-    redirect_to tweets_path
+    redirect_to :back
   end
  
   

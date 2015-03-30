@@ -1,0 +1,2 @@
+module FollowersPagesHelper
+end

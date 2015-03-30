@@ -4,12 +4,15 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :tweets do 
-    resources :retweets
+    resources :retweets, only: [:show, :new, :create, :destroy]
 	resources :likes, only: [:create, :destroy]
 	resources :comments, only: [:new, :create, :destroy]
 	resources :follows, only: [:create, :destroy]
   end
   
+  resources :tweet_pages, only: [:index, :destroy]
+  resources :following_pages, only: [:index, :destroy]
+  resources :followers_pages, only: [:index, :destroy] 
   
   #resources :follows
   

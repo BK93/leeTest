@@ -2,68 +2,40 @@
 <% retweet_count = Retweet.where(user_id: current_user.id).count %>
 <% comment_count = Comment.where(user_id: current_user.id).count %>
 <% tweets_count = tweet_count + retweet_count + comment_count %>
+
 <div class="col-md-3">
-	<br><br>
+<br>
 	<div class="row">
-	  <div class="col-sm-9">
-		<div class="row">
-		  <div class="col-xs-8 col-sm-6">
-			<img class="img-rounded" alt="img" height="80" width="80" src="<%= current_user.image %>">
-		  </div>
-		  <div class="col-xs-4 col-sm-6">
-			<h3><%= current_user.username %></h3>
+	  <img alt="img" class="img-thumbnail" height="220" width="220" src="<%= current_user.image %>" />
+		  <h3><%= current_user.username %></h3>
 			@<%= current_user.userId %>
-		  </div>
-		</div>
-	  </div>
 	</div>	
-	<br>	
-	<div class="row">
-		<div class="col-md-3">
-			<h6><%= link_to "TWEETS", tweet_pages_path %></h6>
-			<h4><%= tweets_count %></h4>
-		</div>
-		<div class="col-md-4">
-			<h6><%= link_to "FOLLOWINGS", following_pages_path %></h6>
-			<h4><%= Follow.where(user_id: current_user.id).count %></h4>
-		</div>	
-		<div class="col-md-5">
-			<h6><%= link_to "FOLLOWERS", followers_pages_path %></h6>
-			<h4><%= Follow.where(follow_id: current_user.id).count %></h4>
-		</div>	
-	</div>
-<hr>
+	
 </div>
 
 
 <div class="col-md-6">
-<table>
-	<tr>
-		<td width="5%">
-			<img alt="img" class="img-rounded" height="50" width="50" src="<%= current_user.image %>">
-		</td>
-		<td width="60%">
-			<%= form_for @tweet do |f| %>
-			  <input class="form-control input-lg" type=<%= f.text_field :content %>
-			  <%= f.hidden_field :user_id, :value => current_user.id %>
-			  <%= f.hidden_field :image, :value => current_user.image %>
-
-			  <% if @tweet.errors.any? %>
-				<%= @tweet.errors.messages[:content][0] %>
-			  <% end %>
-        </td>
-		
-		<td width="10%">
-			&nbsp
-		    <input class="btn btn-primary" name="commit" type="submit" value="tweet"> 	
-		    <% end %>
-		</td>
-	</tr>
-</table>
-<br>
-
+<hr>
+<div class="row">
+	<div class="col-md-2">
+		<h6><%= link_to "TWEETS", tweet_pages_path %></h6>
+		<h4><center><%= tweets_count %></center></h4>
+	</div>
+	<div class="col-md-2">
+		<h6><%= link_to "FOLLOWINGS", following_pages_path %></h6>
+		<h4><center><%= Follow.where(user_id: current_user.id).count %></center></h4>
+	</div>	
+	<div class="col-md-2">
+		<h6><%= link_to "FOLLOWERS", followers_pages_path %></h6>
+		<h4>
+			<center><%= Follow.where(follow_id: current_user.id).count %></center>
+		</h4>
+	</div>	
+</div>
+	
+<hr>
 <table class="table table-striped table-hover">  
-	<% Hash[@tweets_hash].values.each do |tweet| %>
+	<% Hash[@tweets_page_hash].values.each do |tweet| %>
 		<% if tweet.kind_of?(Tweet) %>	
 			<tr class="info">
 				<td width="5%">
@@ -99,7 +71,7 @@
 				</td>		
 					
 				<td>
-					<%= link_to tweet_path(tweet.id), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } do %>
+					<%= link_to tweet_page_path(tweet.id), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } do %>
 					Delete
 					<% end %>
 				</td>
@@ -153,6 +125,7 @@
 	<% end %>
 </table>
 </div>
+
 
 <div class="col-md-3">
 	<h3>How to follow</h3>

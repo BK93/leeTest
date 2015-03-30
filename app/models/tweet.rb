@@ -3,7 +3,7 @@ class Tweet < ActiveRecord::Base
 	
 	has_many :retweets
 	has_many :likes
-	has_many :comments
+	has_many :comments, :dependent => :destroy
 	has_many :follows
 
 	validates :content, presence: { message: "入力して！"},
