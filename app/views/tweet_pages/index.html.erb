@@ -32,8 +32,7 @@
 		</h4>
 	</div>	
 </div>
-	
-<hr>
+
 <table class="table">  
 	<% Hash[@tweets_page_hash].values.each do |tweet| %>
 		<% if tweet.kind_of?(Tweet) %>	
@@ -68,7 +67,7 @@
 				</td>		
 					
 				<td>
-					<%= link_to tweet_page_path(tweet.id), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } do %>
+					<%= link_to tweet_page_path(tweet.id), method: :delete, class: "btn btn-default  btn-sm", data: { confirm: "Are you sure?" } do %>
 					Delete
 					<% end %>
 				</td>
@@ -95,7 +94,7 @@
 				</td>
 				
 				<td>
-				    <%= link_to tweet_retweet_path(tweet.tweet_id, tweet.id), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } do %>
+				    <%= link_to tweet_retweet_path(tweet.tweet_id, tweet.id), method: :delete, class: "btn btn-default  btn-sm", data: { confirm: "Are you sure?" } do %>
 					   Delete
 				    <% end %>
 				</td>
@@ -132,4 +131,5 @@
 		</table>
 		</div>
 	<% end %>
+	<br><br><br><br>
 </div>

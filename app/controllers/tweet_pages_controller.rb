@@ -8,7 +8,8 @@ class TweetPagesController < ApplicationController
 			@users = User.where.not( id: current_user.id )
 			
 			#tweet_page hash설정
-			user_id = User.where(id: current_user.id ).pluck(:id)
+			#user_id = User.where(id: current_user.id ).pluck(:id)
+			user_id = current_user.id
 			
 			tweets_page = Tweet.where(user_id: user_id)
 			tweets_page_retweets = Retweet.where(user_id: user_id)
