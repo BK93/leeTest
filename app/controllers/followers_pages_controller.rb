@@ -1,6 +1,6 @@
 class FollowersPagesController < ApplicationController
 	def index
-		@users = User.all
+		@users = User.where.not( id: current_user.id )
 
 		# hash설정
 		follower_ids = Follow.where(follow_id: current_user.id ).pluck(:user_id)

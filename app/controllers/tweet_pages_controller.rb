@@ -2,8 +2,11 @@ class TweetPagesController < ApplicationController
 
 	def index
 			@tweet = Tweet.new
-			@users = User.all
-
+			@tweets = Tweet.all.order("id DESC") 
+			
+			# 팔로우에서 내 아이디 빼기
+			@users = User.where.not( id: current_user.id )
+			
 			#tweet_page hash설정
 			user_id = User.where(id: current_user.id ).pluck(:id)
 			
@@ -20,11 +23,6 @@ class TweetPagesController < ApplicationController
 			end
 			
 			@tweets_page_hash = @tweets_page_hash.sort_by{|key, val| key}.reverse!
-			
-			Hash[@tweets_page_hash].values.each do |obj|
-			p obj
-			end
-
 	end
 	
 	def destroy

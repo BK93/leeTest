@@ -26,9 +26,9 @@
 			<tr>
 				<td>
 					<% if Follow.new.able?(current_user, user) %>		
-						<%= link_to 'UnFollow', tweet_follow_path(user.id, id: current_user.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: "Are you sure?" } %>
+						<%= link_to 'UnFollow', tweet_follow_path(user.id, id: current_user.id), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
 					<% else %>
-						<%= link_to 'Follow', tweet_follows_path(tweet_id: user.id), method: :post, class: "btn btn-default btn-sm" %>
+						<%= link_to 'Follow', tweet_follows_path(tweet_id: user.id), method: :post, class: "btn btn-info btn-sm" %>
 					<% end %>
 				</td>
 			</tr>
@@ -71,9 +71,9 @@
 				<br><br>
 				<div class="col-xs-4 col-sm-3">
 					<% if Follow.new.able?(current_user, user) %>		
-						<%= link_to 'UnFollow', tweet_follow_path(user.id, id: current_user.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: "Are you sure?" } %>
+						<%= link_to 'UnFollow', tweet_follow_path(user.id, id: current_user.id), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
 					<% else %>
-						<%= link_to 'Follow', tweet_follows_path(tweet_id: user.id), method: :post, class: "btn btn-default btn-sm" %>
+						<%= link_to 'Follow', tweet_follows_path(tweet_id: user.id), method: :post, class: "btn btn-info btn-sm" %>
 					<% end %>
 				</div>
 			</div>

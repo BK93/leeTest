@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   
   #resources :follows
   
-  root 'welcome#index'
+  devise_scope :user do
+	root :to => 'devise/sessions#new'
+  end
 
     #member do
 	#  post 'like'

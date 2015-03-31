@@ -1,30 +1,35 @@
 class TweetsController < ApplicationController
 
 	  def index
-		follow_ids = Follow.where(user_id: current_user.id ).pluck(:follow_id)
+		@tweet = Tweet.new
+		@tweets = Tweet.all.order("id DESC") 
 		
+		# 내 트윗, 리트윗
+		own_tweets = current_user.tweets
+		own_retweets = current_user.retweets	
+
+		# 나는 팔로우 목록에서 뺀다
+		@users = User.where.not( id: current_user.id )
+				
+		# follow한 사람의 tweet, retweet
+		follow_ids = Follow.where(user_id: current_user.id ).pluck(:follow_id)
 		tweets = Tweet.where(user_id: follow_ids)
 		retweets = Retweet.where(user_id: follow_ids)
-		comments = Comment.where(user_id: follow_ids)	
 		
-		@tweet = Tweet.new
-		@users = User.all
+		tweets_adds = own_tweets + tweets
+		retweets_adds = own_retweets + retweets
 		
 		@tweets_hash = {}
 		
-		tweets.each do |tweet|
+		tweets_adds.each do |tweet|
 		  @tweets_hash.store(tweet.created_at, tweet)
 		end
 		
-		retweets.each do |retweet|
+		retweets_adds.each do |retweet|
 		  @tweets_hash.store(retweet.created_at, retweet)
 		end
-		
+
 		@tweets_hash = @tweets_hash.sort_by{|key, val| key}.reverse!
-		
-		Hash[@tweets_hash].values.each do |obj|
-		p obj
-		end
 		
 	  end
 
@@ -66,6 +71,6 @@ class TweetsController < ApplicationController
 	  private
 	   
 	   def tweet_params
-		 params[:tweet].permit(:content, :user_id, :image)
+		 params[:tweet].permit(:content, :user_id, :image, :tweet_userId, :tweet_username)
 	   end
 end

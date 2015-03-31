@@ -7,6 +7,8 @@
   <%= f.text_field :content %>
   <%= f.hidden_field :user_id, :value => current_user.id %>
   <%= f.hidden_field :image, :value => current_user.image %>
+  <%= f.hidden_field :tweet_userId, :value => current_user.userId %>
+  <%= f.hidden_field :tweet_username, :value => current_user.username %>
 
   <% if @tweet.errors.any? %>
   <%= @tweet.errors.messages[:content][0] %>

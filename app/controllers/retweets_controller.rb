@@ -3,7 +3,7 @@ class RetweetsController < ApplicationController
 
   def show
     @retweet = Retweet.new
-	@retweet_find = Tweet.find(params[:tweet_id])
+	@retweet_find = Tweet.find(params[:tweet_id])	
   end
   
   def new
@@ -35,6 +35,6 @@ class RetweetsController < ApplicationController
     end
 	
     def retweet_params
-      params.require(:retweet).permit( :tweet_id, :image, :username, :user_id, :content )
+      params.require(:retweet).permit( :tweet_id, :image, :username, :user_id, :content, :tweet_userId, :tweet_username )
     end
 end
