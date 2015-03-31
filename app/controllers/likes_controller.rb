@@ -1,30 +1,24 @@
 class LikesController < ApplicationController
-
-  def index
-    redirect_to new_tweet_like_path(params[:tweet_id])
-  end
-
-  def new
-	@like = Like.new 
-	@like_find = Tweet.find(params[:tweet_id])
-  end
-
+  before_action :set_tweet
+  
   def create
-    @like = Like.new(like_params)
-
-	if @like.save
+    if Like.create(tweet_id: params[:tweet_id], user_id: current_user.id)
 	  redirect_to tweets_path
     else
-	  flash.now[:notice] = "もう LIKE しました"
-	  render 'new'
-	  # render :action => "new"
-	  # render :template => "tweets/show"
-	end
+      redirect_to tweets_path
+    end
+  end
+  
+  def destroy
+    Like.where(tweet_id: @tweet.id, user_id: current_user.id).first.destroy
+    redirect_to tweets_path
   end
   
   private
   
-    def like_params
-	  params.require(:like).permit(:tweet_id, :user_id)
-	end
+  def set_tweet
+    @tweet = Tweet.find(params[:tweet_id] || params[:id])
+  end
+  
+
 end
