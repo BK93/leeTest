@@ -1,3 +1,158 @@
 // Place all the styles related to the Tweet_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body{ 
+	background: #F5F8FA;
+}
+
+.blue{
+	background: #0084B4;
+	height:150px;
+    border-bottom:1px solid #eee;
+}
+.blue-bottom{
+	background: #FFFFFF;
+	height:60px;
+	padding-left: 310px;
+    border-bottom:1px solid #E1E8ED;	
+	
+	.blue-buttons{
+		padding: 10px;
+		float: left;
+		
+		.blue-button{
+			float: left;
+			width: 80px;
+			margin-right: 10px;
+			font-size: 10px;
+			text-align: center;
+			
+			.blue-count{
+				.count-font{
+					color: #0480be;
+					text-align: center;
+					font-size: 15px;
+					padding: 0;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+
+.pink{
+	padding-top:50px;
+	margin-left:70px;
+	width:250px;
+	height:380px; 
+	# background: pink;
+	
+	.image{
+		border-radius: 10px;	
+		border: 5px solid #ffffff;
+	}
+}
+.col-md-3{
+	padding:0;
+}
+
+.tweet-page-all{
+	border:1px solid #E1E8ED;	
+	margin-top: 10px;
+	padding-bottom: 10px;
+	background-color: #ffffff;
+    border-radius: 5px;
+	
+	.tweet-page{
+		border-top:1px solid #E1E8ED;
+		padding:10px;
+
+		.tweet-page-image{
+			float: left;
+			margin-right: 5px;
+		}
+		.tweet-page-right{
+			overflow:hidden;
+			
+			.tweet-page-username{
+				float: left;
+				padding-right:5px;
+			}
+			.tweet-page-userId{
+				margin:0;
+				color: #898585;
+			}
+			.tweet-page-content{
+				overflow:hidden;
+				
+				.font{ margin:0; }
+			}
+			.tweet-page-bt{
+				padding-top: 5px;
+				float: left;
+				padding-right: 30px;
+			}
+			.tweet-page-delete-bt{
+				text-align: right;
+			}
+		}
+		
+		.tweet-page-icon{
+			# background-color: #FECBFF;
+			padding-left: 10px;
+			padding-bottom: 5px;
+			color: #898585;
+			font-size: 12px;
+		}
+	}
+}
+
+
+
+.tweet-page-follow-all{
+	border:1px solid #E1E8ED;
+	margin-top: 10px;
+	margin-bottom: 30px;
+	padding-bottom: 10px;
+	background-color: #ffffff;
+    border-radius: 5px;
+	padding: 15px;
+	padding-bottom: 20px;
+	
+	h4{
+		margin:0;
+		color: #898585;
+		font-size: 18px;
+	}
+
+	.follow-all{
+		padding-top:15px;
+		
+		.follow-image{
+			float: left;
+			margin-right: 10px;
+		}
+		.follow-user{
+			.follow-username{
+				float: left;
+				margin-right: 5px;
+			}
+			.follow-userId{
+				color: #898585;
+				# background-color: #14D8C8;
+				font-size: 11px;	
+			}
+		}
+		.follow-bt{
+			margin-top:5px;
+			# background-color: #FECBFF;
+			text-align: left;
+		}
+	}
+}
+
+
+
+

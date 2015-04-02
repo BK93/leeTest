@@ -3,6 +3,11 @@ class FollowingPagesController < ApplicationController
 	def index
 		@users = User.where.not( id: current_user.id )
 
+		tweet_count = Tweet.where(user_id: current_user.id).count 
+		retweet_count = Retweet.where(user_id: current_user.id).count
+		comment_count = Comment.where(user_id: current_user.id).count 
+		@tweets_count = tweet_count + retweet_count + comment_count	
+		
 		#following_pages hash설정
 		follow_ids = Follow.where(user_id: current_user.id ).pluck(:follow_id)
 		
