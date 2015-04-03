@@ -34,7 +34,7 @@ Rails.application.configure do
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
-  # config.assets.raise_runtime_errors = true
+  config.assets.raise_runtime_errors = true
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
@@ -47,8 +47,8 @@ Rails.application.configure do
 	address:               'smtp.gmail.com',
 	port:      	           587,
 	domain:                'smtp.gmail.com',
-	user_name:             'email',
-	password:              'password',
+	user_name:             'zxc3485@gmail.com',
+	password:              'zxcasdqwe3485',
 	authentication:        'plain',
 	enable_starttls_auto:  true
   }

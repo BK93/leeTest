@@ -31,12 +31,4 @@ def index
 			
 			@tweets_page_hash = @tweets_page_hash.sort_by{|key, val| key}.reverse!
 	end
-	
-	def destroy
-		@tweet = Tweet.find(params[:id])
-		@tweet.destroy
-		
-		redirect_to tweet_pages_path
-	end
-	
 end

@@ -2,27 +2,25 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :tweets do 
-    resources :retweets, only: [:show, :new, :create, :destroy]
-	resources :likes, only: [:create, :destroy]
+    resources :retweets, only: [:new, :create, :destroy]
 	resources :comments, only: [:new, :create, :destroy]
+	resources :re_comments, only: [:new, :create, :destroy]
+	
+	resources :likes, only: [:create, :destroy]
+	
 	resources :follows, only: [:create, :destroy]
   end
   
   resources :tweet_pages, only: [:index, :destroy]
-  resources :tweet_page_replies, only: [:index, :destroy]
-  resources :following_pages, only: [:index, :destroy]
-  resources :followers_pages, only: [:index, :destroy] 
+  resources :tweet_page_replies, only: [:index]
+  resources :following_pages, only: [:index]
+  resources :followers_pages, only: [:index] 
   
   
   devise_scope :user do
 	root :to => 'devise/sessions#new'
   end
 
-    #member do
-	#  post 'like'
-	#  post 'unlike'
-	# end
-	# resources :likes, only: [:create, :destroy]
 	
   # post '/tweets/:tweet_id/likes/:id/toggle' => 'likes#toggle'
   

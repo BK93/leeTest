@@ -7,6 +7,7 @@ class TweetPagesController < ApplicationController
 			# 팔로우에서 내 아이디 빼기
 			@users = User.where.not( id: current_user.id )
 			
+			# 카운트
 			tweet_count = Tweet.where(user_id: current_user.id).count 
 			retweet_count = Retweet.where(user_id: current_user.id).count
 			comment_count = Comment.where(user_id: current_user.id).count 

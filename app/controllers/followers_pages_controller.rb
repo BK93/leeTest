@@ -20,11 +20,4 @@ class FollowersPagesController < ApplicationController
 		
 		@follower_users_hash = @follower_users_hash.sort_by{|key, val| key}.reverse!
 	end
-	
-	def destroy
-		@tweet = Tweet.find(params[:id])
-		@tweet.destroy
-		
-		redirect_to following_pages_path
-	end
 end

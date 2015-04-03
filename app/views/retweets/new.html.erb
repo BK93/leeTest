@@ -1,29 +1,31 @@
+<%= stylesheet_link_tag "comments", :media => "all" %>
 
-<div id="welcome">
-<h1>retweet?</h1>
+<div class="container">
+	<div class="margin">
+		<h1>retweet?</h1>
 
-<label>content: </label>
-<table class="table table-striped table-hover ">
-  <tr class="info">
-      <td><%= @retweet_find.content %></td>
-  </tr>
-</table>
+		<label>content: </label>
+		<table class="table table-striped table-hover ">
+		  <tr class="info">
+			  <td><%= @retweet_find.content %></td>
+		  </tr>
+		</table>
 
-<%= form_for(@retweet, url: tweet_retweets_path) do |f| %>
+		<%= form_for(@retweet, url: tweet_retweets_path) do |f| %>
 
-	<%= f.hidden_field :tweet_id, :value => params[:tweet_id] %>
-	<%= f.hidden_field :image, :value => @retweet_find.image %>
-    <%= f.hidden_field :user_id, :value => current_user.id %>	
-	<%= f.hidden_field :username, :value => current_user.username %>
-	<%= f.hidden_field :content, :value => @retweet_find.content %>
-	<%= f.hidden_field :tweet_username, :value => @retweet_find.tweet_username %>
-	<%= f.hidden_field :tweet_userId, :value => @retweet_find.tweet_userId %>
-	
-	<input class="btn btn-info" type="submit" value="retweet !">
+			<%= f.hidden_field :tweet_id, :value => params[:tweet_id] %>
+			<%= f.hidden_field :image, :value => @retweet_find.image %>
+			<%= f.hidden_field :user_id, :value => current_user.id %>	
+			<%= f.hidden_field :username, :value => current_user.username %>
+			<%= f.hidden_field :content, :value => @retweet_find.content %>
+			<%= f.hidden_field :tweet_username, :value => @retweet_find.tweet_username %>
+			<%= f.hidden_field :tweet_userId, :value => @retweet_find.tweet_userId %>
+			
+			<input class="btn btn-info" type="submit" value="retweet !">
 
-	<%= link_to tweets_path, class: "btn btn-default" do %>
-		Back
-	<% end %>
-<% end %>
-
+			<%= link_to tweets_path, class: "btn btn-default" do %>
+				Back
+			<% end %>
+		<% end %>
+	</div>
 </div>

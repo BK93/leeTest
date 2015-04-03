@@ -15,7 +15,9 @@ class RetweetsController < ApplicationController
     @retweet = Retweet.new(retweet_params)
 
     if @retweet.save
-	  redirect_to tweets_path, notice: 'retweet complete!'
+		PostMailer.post_mail(params[:tweet_id]).deliver
+		
+		redirect_to tweets_path, notice: 'retweet complete!'
     else
 	  render :back
     end

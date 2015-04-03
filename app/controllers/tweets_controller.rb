@@ -5,6 +5,7 @@ class TweetsController < ApplicationController
 		@tweet = Tweet.new
 		@tweets = Tweet.all.order("id DESC") 
 		
+		# 카운터
 		tweet_count = Tweet.where(user_id: current_user.id).count
 		retweet_count = Retweet.where(user_id: current_user.id).count
 		comment_count = Comment.where(user_id: current_user.id).count
@@ -13,6 +14,7 @@ class TweetsController < ApplicationController
 		# 내 트윗, 리트윗
 		own_tweets = current_user.tweets
 		own_retweets = current_user.retweets
+		
 		
 		# 나는 팔로우 목록에서 뺀다
 		@users = User.where.not( id: current_user.id )
@@ -37,11 +39,6 @@ class TweetsController < ApplicationController
 		@tweets_hash = @tweets_hash.sort_by{|key, val| key}.reverse!
 	  end
 
-	  def show 
-		@tweet = Tweet.find(params[:id])
-		@retweet = Retweet.new 
-	  end
-
 	  def new
 		@tweet = Tweet.new
 	  end
@@ -49,7 +46,7 @@ class TweetsController < ApplicationController
 	  def create
 		@tweet = Tweet.new(tweet_params)
 		
-		if @tweet.save
+		if @tweet.save		
 		  redirect_to tweets_path, notice: 'tweet complete!'
 		else
 		  render 'new'
