@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :retweets
   has_many :likes
   has_many :follows
+  has_many :comments
 
   mount_uploader :image, ImageUploader
 

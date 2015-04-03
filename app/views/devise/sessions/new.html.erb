@@ -1,16 +1,20 @@
-<div class="col-md-6">
+<%= stylesheet_link_tag "test2", :media => "all" %>
+<div class="bd">
 
-<br><br><br>
-<h1>Welcome to Twitter.</h1>
-<br>
-<h3>
-	Connect with your friends — and other fascinating people. <br>
-	Get in-the-moment updates on the things that interest you.<br> 
-	And watch events unfold, in real time, from every angle.<br>
-<h3>
+<div class="col-md-6">
+	<div class="font">
+		<h1>Welcome to Twitter.</h1>
+		<h3>
+			Connect with your friends — and other fascinating people. <br>
+			Get in-the-moment updates on the things that interest you.<br> 
+			And watch events unfold, in real time, from every angle.<br>
+		<h3>
+	</div>
 </div>
+
 <div class="col-md-1">
 </div>
+
 <div class="col-md-3">
 	<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 		<br><br>
@@ -21,10 +25,10 @@
 		<table>
 			<div class="form-group">
 				<tr>
-					<td width="170">
+					<td width="50%">
 						<%= f.password_field :password, class: "form-control", autocomplete: "off", :placeholder => 'Password' %>
 					</td>
-					<td>
+					<td width="20%">
 						&nbsp&nbsp
 						<input class="btn btn-primary" type="submit" value="Log in">	
 					</td>
@@ -53,11 +57,11 @@
 	</div>
   
 	<div class="form-group">
-		<%= f.text_field :userId, class: "form-control",autofocus: true, :placeholder => 'Full name' %>
+		<%= f.text_field :username, class: "form-control",autofocus: true, :placeholder => 'Full name' %>
 	</div>
 	
 	<div class="form-group">
-		<%= f.text_field :userId, class: "form-control",autofocus: true, :placeholder => 'Email' %>
+		<%= f.text_field :email, class: "form-control",autofocus: true, :placeholder => 'Email' %>
 	</div>
 
 	<div class="form-group">
@@ -80,4 +84,6 @@
 	<p class="text-right"><input class="btn btn-warning btn-sm" type="submit" value="Sign up for Twitter"></p>
 	<br><br>
 <% end %>
+</div>
+
 </div>

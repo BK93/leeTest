@@ -10,7 +10,6 @@ class PostMailer < ApplicationMailer
   def post_mail
 	# @user = User.find(user_id).email
 	
-	@greeting = "Hi"
 	
     mail(to: 'zxc3485@naver.com', subject: 'HELLO')
 		   

@@ -2,21 +2,16 @@
 <div class="row">
 <div class="container">
 
-<% tweet_count = Tweet.where(user_id: current_user.id).count %>
-<% retweet_count = Retweet.where(user_id: current_user.id).count %>
-<% comment_count = Comment.where(user_id: current_user.id).count %>
-<% tweets_count = tweet_count + retweet_count + comment_count %>
-
 <div class="col-md-3" >	
 	<div class="modal-header"> 
 	<div class="row">
 	</div>
 	  <div class="col-sm-9">
 		<div class="row">
-		  <div class="col-xs-8 col-sm-6">
+		  <div class="col-xs-8 col-sm-5">
 			<img class="modal-img-rounded" alt="img" height="80" width="80" src="<%= current_user.image %>">
 		  </div>
-		  <div class="col-xs-4 col-sm-6">
+		  <div class="col-xs-4 col-sm-7">
 			<div class="username">
 				<h4><%= current_user.username %></h4>
 				<h6>@<%= current_user.userId %></h6>
@@ -29,7 +24,7 @@
 	<div class="modal-footer">
 		<div class="an">
 			<h6><%= link_to "TWEETS", tweet_pages_path %></h6>
-			<h4><%= tweets_count %></h4>
+			<h4><%= @tweets_count %></h4>
 		</div>
 		<div class="an">
 			<h6><%= link_to "FOLLOWINGS", following_pages_path %></h6>
@@ -89,12 +84,15 @@
 								</div>
 							</div>
 							
+							<!-- 리플 -->
 							<div class="center-tweet-right-bt">
 								<%= link_to image_tag("reply_bt.png", :size => "15x15"), new_tweet_comment_path(tweet.id, @tweet) %>
 							</div>	
+							<!-- 리트윗 -->
 							<div class="center-tweet-right-bt">
 								<%= link_to image_tag("retweet_bt.png", :size => "20x20"), new_tweet_retweet_path(tweet.id, @tweet) %>			  
 							</div>
+							<!-- 라이크 -->
 							<div class="center-tweet-right-bt">
 								<% if Like.new.likable_for?(current_user, tweet) %>
 									<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_like_path(tweet.id, id: tweet.id), :method => :delete %>
@@ -102,6 +100,7 @@
 									<%= link_to image_tag("favorite_bt2.png", :size => "15x15"), tweet_likes_path(tweet_id: tweet.id), method: :post %>
 								<% end %>
 								<%= tweet.likes.count %>
+								<% @count = tweet.likes.count %>
 							</div>	
 							
 							<div class="center-tweet-right-delete">
@@ -112,7 +111,7 @@
 						</div>	
 					</div>
 					
-					<!-- comment -->
+					<!-- 코멘트 -->
 					<% tweet.comments.each do |comment| %>
 						<div class="center-tweet">
 							<div class="center-tweet-image">
@@ -141,6 +140,7 @@
 					<% end %>
 					
 				<% else %>
+				<!-- retweet -->
 					<div class="center-tweet">
 						<div class="center-retweet-icon">
 							<%= image_tag "retweet_icon.png", size: "16x18" %>
@@ -168,13 +168,34 @@
 								</div>
 							</div>
 							
+							<!-- 리플 -->
+							<div class="center-tweet-right-bt">
+								<%= link_to image_tag("reply_bt.png", :size => "15x15"), new_tweet_comment_path(tweet.tweet_id, @tweet) %>
+							</div>
+							
+							<!-- 리트윗 -->
+							<div class="center-tweet-right-bt">
+								<%= link_to image_tag("retweet_bt.png", :size => "20x20"), new_tweet_retweet_path(tweet.tweet_id, @tweet) %>			  
+							</div>
+							
+							<!-- 라이크 -->
+							<div class="center-tweet-right-bt">
+								<% if Like.new.likable_for_to?(current_user, tweet) %>
+									<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_like_path(tweet.tweet_id, id: tweet.tweet_id), :method => :delete %>
+								<% else %>
+									<%= link_to image_tag("favorite_bt2.png", :size => "15x15"), tweet_likes_path(tweet_id: tweet.tweet_id), method: :post %>
+								<% end %>
+							</div>	
+						
 							<div class="center-retweet-right-delete">
 								<%= link_to tweet_retweet_path(tweet.tweet_id, tweet.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: "Are you sure?" } do %>
-									Delete
+								   Delete
 								<% end %>
-							</div>
-						</div>	
+							</div>	
+						
+						</div>
 					</div>
+					
 				<% end %>
 				
 			<% end %>

@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     if @comment.save
 	  redirect_to tweets_path, notice: 'comment complete!'
     else
-	  render 'new'
+	  render :back
     end
   end
    

@@ -17,7 +17,7 @@ class RetweetsController < ApplicationController
     if @retweet.save
 	  redirect_to tweets_path, notice: 'retweet complete!'
     else
-	  render 'new'
+	  render :back
     end
   end
    

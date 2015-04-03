@@ -20,10 +20,6 @@ class FollowingPagesController < ApplicationController
 		end
 		
 		@follow_users_hash = @follow_users_hash.sort_by{|key, val| key}.reverse!
-		
-		Hash[@follow_users_hash].values.each do |obj|
-		p obj
-		end
 
 	end
 	

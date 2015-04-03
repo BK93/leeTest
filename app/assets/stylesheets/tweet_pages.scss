@@ -61,9 +61,51 @@ body{
 .tweet-page-all{
 	border:1px solid #E1E8ED;	
 	margin-top: 10px;
-	padding-bottom: 10px;
 	background-color: #ffffff;
     border-radius: 5px;
+	margin-bottom: 50px;
+	
+	.link-row{
+		margin: 10px;
+		
+		strong{
+			font-size: 18px;
+			font-weight: normal;
+			margin-right: 15px;
+			margin-left: 10px;
+		}
+	}
+	
+	.center-tweet{
+		padding-left:10px;
+		
+		.center-tweet-image{
+			float: left;
+			margin-right: 10px;
+		}
+		.center-tweet-right-delete{
+			text-align: right;
+		}
+	}
+	
+	.replies-row{
+		margin:10px;
+		
+		hr{
+			margin:0;
+			padding:0;
+		}
+		
+		.replies-image{
+			float: left;
+			margin-right: 5px;
+			padding-left: 10px;
+		}
+		.replies-right-delete{
+			text-align: right;
+			margin:0;
+		}	
+	}
 	
 	.tweet-page{
 		border-top:1px solid #E1E8ED;
@@ -73,6 +115,12 @@ body{
 			float: left;
 			margin-right: 5px;
 		}
+		.tweet-page-re-image{
+			float: left;
+			margin-left: 10px;
+			margin-right: 5px;
+		}
+				
 		.tweet-page-right{
 			overflow:hidden;
 			
@@ -101,11 +149,12 @@ body{
 		
 		.tweet-page-icon{
 			# background-color: #FECBFF;
-			padding-left: 10px;
+			padding-left: 25px;
 			padding-bottom: 5px;
 			color: #898585;
 			font-size: 12px;
 		}
+		
 	}
 }
 
@@ -152,7 +201,6 @@ body{
 		}
 	}
 }
-
 
 
 

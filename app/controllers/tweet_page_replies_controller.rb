@@ -1,7 +1,7 @@
-class TweetPagesController < ApplicationController
-	before_action :authenticate_user!
-	
-	def index
+class TweetPageRepliesController < ApplicationController
+before_action :authenticate_user!
+
+def index
 			@tweet = Tweet.new
 			
 			# 팔로우에서 내 아이디 빼기
@@ -11,11 +11,14 @@ class TweetPagesController < ApplicationController
 			retweet_count = Retweet.where(user_id: current_user.id).count
 			comment_count = Comment.where(user_id: current_user.id).count 
 			@tweets_count = tweet_count + retweet_count + comment_count		
-
-			#tweet_page hash설정
 			
+			
+			#hash설정
 			tweets_page = Tweet.where(user_id: current_user.id)
 			tweets_page_retweets = Retweet.where(user_id: current_user.id)
+			
+			@comments = Comment.where(user_id: current_user.id)
+
 			
 			@tweets_page_hash = {}
 			
@@ -35,6 +38,5 @@ class TweetPagesController < ApplicationController
 		
 		redirect_to tweet_pages_path
 	end
-	
 	
 end

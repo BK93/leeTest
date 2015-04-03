@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   
-  get 'welcome/index'
-
   resources :tweets do 
     resources :retweets, only: [:show, :new, :create, :destroy]
 	resources :likes, only: [:create, :destroy]
@@ -11,10 +9,10 @@ Rails.application.routes.draw do
   end
   
   resources :tweet_pages, only: [:index, :destroy]
+  resources :tweet_page_replies, only: [:index, :destroy]
   resources :following_pages, only: [:index, :destroy]
   resources :followers_pages, only: [:index, :destroy] 
   
-  #resources :follows
   
   devise_scope :user do
 	root :to => 'devise/sessions#new'
