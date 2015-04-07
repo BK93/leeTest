@@ -14,12 +14,9 @@
 		<%= form_for(@retweet, url: tweet_retweets_path) do |f| %>
 
 			<%= f.hidden_field :tweet_id, :value => params[:tweet_id] %>
-			<%= f.hidden_field :image, :value => @retweet_find.image %>
 			<%= f.hidden_field :user_id, :value => current_user.id %>	
 			<%= f.hidden_field :username, :value => current_user.username %>
 			<%= f.hidden_field :content, :value => @retweet_find.content %>
-			<%= f.hidden_field :tweet_username, :value => @retweet_find.tweet_username %>
-			<%= f.hidden_field :tweet_userId, :value => @retweet_find.tweet_userId %>
 			
 			<input class="btn btn-info" type="submit" value="retweet !">
 

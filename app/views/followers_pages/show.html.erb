@@ -15,7 +15,7 @@
 						<table>
 							<tr class="tr">
 								<td rowspan="2" class="col-md-1">
-									<img alt="img" class="img-rounded" height="40" width="40" src="<%= user.image %>" />
+									<%= link_to image_tag( user.image, :size => "40x40", :class => "img-rounded" ), tweet_page_path(user.id) %>
 								</td>
 								<td>
 									<strong><%= link_to user.username, tweet_page_path(user.id) %></strong> 
@@ -75,6 +75,14 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="follow_bt">
+		<% if Follow.new.able?(current_user, @user) %>		
+			<%= link_to 'UnFollow', tweet_follow_path(@user.id, id: current_user.id), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+		<% else %>
+			<%= link_to 'Follow', tweet_follows_path(tweet_id: @user.id), method: :post, class: "btn btn-info" %>
+		<% end %>
+	</div>	
 </div>	
 
 

@@ -39,7 +39,15 @@
 					<%= Follow.where(follow_id: @user.id).count %>
 				</div>
 			</div>
-		</div>			
+		</div>
+	</div>
+	
+	<div class="follow_bt">
+		<% if Follow.new.able?(current_user, @user) %>		
+			<%= link_to 'UnFollow', tweet_follow_path(@user.id, id: current_user.id), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+		<% else %>
+			<%= link_to 'Follow', tweet_follows_path(tweet_id: @user.id), method: :post, class: "btn btn-info" %>
+		<% end %>
 	</div>
 </div>	
 
@@ -70,16 +78,13 @@
 									<%= tweet.content %> 
 								</div>
 							</div>
-										
-							<!-- -->
+									
 							<div class="tweet-page-bt">
 								<%= link_to image_tag("reply_bt.png", :size => "15x15"), new_tweet_comment_path(tweet.id, @tweet) %>
 							</div>
-							<!--  -->
 							<div class="tweet-page-bt">
 								<%= link_to image_tag("retweet_bt.png", :size => "20x20"), new_tweet_retweet_path(tweet.id, @tweet) %>			  
-							</div>		
-							<!-- -->							
+							</div>								
 							<div class="tweet-page-bt">			
 								<% if Like.new.likable_for?(current_user, tweet) %>
 									<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_like_path(tweet.id, id: tweet.id), :method => :delete %>
@@ -99,16 +104,16 @@
 					</div>
 					
 					<div class="tweet-page-re-image">
-						<img alt="img" class="img-rounded" height="25" width="25" src="<%= tweet.image %>" />
+						<%= link_to image_tag( tweet.tweet.user.image, :size => "25x25", :class => "img-rounded" ), tweet_page_path(tweet.user.id) %>
 					</div>
 						
 					<div class="tweet-page-right">
 						<div class="tweet-page-username">
-							<strong><%= tweet.tweet_username %></strong>
+							<strong><%= tweet.tweet.user.username %></strong>
 						</div>
 					
 						<div class="tweet-page-userId">
-							@<%= tweet.tweet_userId %>
+							@<%= tweet.tweet.user.userId %>
 							<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
 						</div>
 							
@@ -118,23 +123,22 @@
 							</div>
 						</div>
 							
-						<!--  -->
 						<div class="tweet-page-bt">
 							<%= link_to image_tag("reply_bt.png", :size => "15x15"), new_tweet_comment_path(tweet.tweet_id, @tweet) %>
 						</div>
 						
-						<!--  -->
 						<div class="tweet-page-bt">
 							<%= link_to image_tag("retweet_bt.png", :size => "20x20"), tweet_retweet_path(tweet.tweet_id, tweet.id), method: :delete %>			  
 						</div>
 							
-						<!--  -->
 						<div class="tweet-page-bt">
-							<% if Like.new.likable_for_to?(current_user, tweet) %>
-								<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_like_path(tweet.tweet_id, id: tweet.tweet_id), :method => :delete %>
+							<% if ReLike.new.likable_for?(current_user, tweet) %>
+								<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_re_like_path(tweet.id, id: tweet.tweet.id), :method => :delete %>
 							<% else %>
-								<%= link_to image_tag("favorite_bt2.png", :size => "15x15"), tweet_likes_path(tweet_id: tweet.tweet_id), method: :post %>
+								<%= link_to image_tag("favorite_bt2.png", :size => "15x15"), tweet_re_likes_path(tweet_id: tweet.id), method: :post %>
 							<% end %>
+								
+							<%= tweet.re_likes.count %>
 						</div>	
 					</div>
 				<% end %>
@@ -152,7 +156,7 @@
 		<% @users.each do |user| %>
 			<div class="follow-all">
 				<div class="follow-image">	
-					<img alt="img" class="img-rounded" height="55" width="55" src="<%= user.image %>" />
+					<%= link_to image_tag( user.image, :size => "55x55", :class => "img-rounded" ), tweet_page_path(user.id) %>
 				</div>
 				<div class="follow-user">
 					<div class="follow-username">

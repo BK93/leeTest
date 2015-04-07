@@ -48,9 +48,6 @@
 					<%= form_for @tweet do |f| %>
 					  <input class="form-control" type=<%= f.text_field :content,:placeholder => "What's happening?" %>
 					  <%= f.hidden_field :user_id, :value => current_user.id %>
-					  <%= f.hidden_field :image, :value => current_user.image %>
-					  <%= f.hidden_field :tweet_userId, :value => current_user.userId %>
-					  <%= f.hidden_field :tweet_username, :value => current_user.username %>
 
 					  <% if @tweet.errors.any? %>
 						<%= @tweet.errors.messages[:content][0] %>
@@ -67,7 +64,7 @@
 				<% if tweet.kind_of?(Tweet) %>	
 					<div class="center-tweet">
 						<div class="center-tweet-image">
-						   <img class="img-rounded" alt="img" height="40" width="40" src="<%= tweet.user.image %>" />
+						   <%= link_to image_tag( tweet.user.image, :size => "40x40", :class => "img-rounded" ), tweet_page_path(tweet.user.id) %>
 						</div>
 						
 						<div class="center-tweet-right">
@@ -119,13 +116,13 @@
 					<% tweet.comments.each do |comment| %>
 						<div class="center-tweet">
 							<div class="center-tweet-image">
-								<img class="img-rounded" alt="img" height="40" width="40" src="<%= comment.image %>" />
+								<%= link_to image_tag( comment.user.image, :size => "40x40", :class => "img-rounded" ), tweet_page_path(comment.user.id) %>
 							</div>
 							
 							<div class="center-tweet-right">
 								<div class="center-tweet-right-username">
-									<strong><%= comment.username %></strong>
-									@ <%= comment.userId %>&nbsp・
+									<strong><%= comment.user.username %></strong>
+									@ <%= comment.user.userId %>&nbsp・
 									<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
 								</div>
 							</div>
@@ -133,7 +130,7 @@
 							<div class="center-tweet-right-content">
 								<div class="font">
 									<font color="#4374D9"> 
-										@<%= comment.tweet.tweet_userId %>
+										@<%= comment.tweet.user.userId %>
 									</font>	
 									&nbsp<%= comment.comment %>
 								</div>
@@ -161,16 +158,16 @@
 						</div>
 						
 						<div class="center-tweet-image">						   
-							<img alt="img" class="img-rounded" height="40" width="40" src="<%= tweet.image %>" />
+							<%= link_to image_tag( tweet.tweet.user.image, :size => "40x40", :class => "img-rounded" ), tweet_page_path(tweet.user.id) %>
 						</div>
 								
 						<div class="center-tweet-right">
 							<div class="center-tweet-right-username">
-								<strong><%= tweet.tweet_username %></strong>
+								<strong><%= tweet.tweet.user.username %></strong>
 							</div>
 							
 							<div class="center-tweet-right-userId">
-								@<%= tweet.tweet_userId %>&nbsp・
+								@<%= tweet.tweet.user.userId %>&nbsp・
 								<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
 							</div>
 							
@@ -217,13 +214,13 @@
 					<% tweet.re_comments.each do |recomment| %>
 						<div class="center-tweet">
 							<div class="center-tweet-image">
-								<img class="img-rounded" alt="img" height="40" width="40" src="<%= recomment.image %>" />
+								<img class="img-rounded" alt="img" height="40" width="40" src="<%= recomment.user.image %>" />
 							</div>
 							
 							<div class="center-tweet-right">
 								<div class="center-tweet-right-username">
-									<strong><%= recomment.username %></strong>
-									@<%= recomment.userId%>&nbsp
+									<strong><%= recomment.user.username %></strong>
+									@<%= recomment.user.userId%>&nbsp
 									<%= recomment.created_at.strftime('%Y/%m/%d %H:%M') %>
 								</div>
 							</div>
@@ -231,7 +228,7 @@
 							<div class="center-tweet-right-content">
 								<div class="font">
 									<font color="#4374D9"> 
-										@<%= recomment.retweet.tweet_userId %>
+										@<%= recomment.retweet.tweet.user.userId %>
 									</font>	
 									&nbsp<%= recomment.comment %>
 								</div>
@@ -263,7 +260,7 @@
 		<% @users.each do |user| %>
 			<div class="follow-all">
 				<div class="follow-image">	
-					<img alt="img" class="img-rounded" height="40" width="40" src="<%= user.image %>" />
+					<%= link_to image_tag( user.image, :size => "40x40", :class => "img-rounded" ), tweet_page_path(user.id) %>
 				</div>
 				
 				<div class="follow-user">

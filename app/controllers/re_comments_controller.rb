@@ -25,6 +25,6 @@ class ReCommentsController < ApplicationController
   private
 	
     def recomment_params
-      params.require(:re_comment).permit(:retweet_id, :username, :userId, :image, :comment, :user_id)
+      params.require(:re_comment).permit(:retweet_id, :comment, :user_id)
     end
 end

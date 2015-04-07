@@ -108,16 +108,16 @@
 					</div>
 					
 					<div class="tweet-page-re-image">
-						<img alt="img" class="img-rounded" height="25" width="25" src="<%= tweet.image %>" />
+						<%= link_to image_tag( tweet.tweet.user.image, :size => "25x25", :class => "img-rounded" ), tweet_page_path(tweet.user.id) %>
 					</div>
 						
 					<div class="tweet-page-right">
 						<div class="tweet-page-username">
-							<strong><%= tweet.tweet_username %></strong>
+							<strong><%= tweet.tweet.user.username %></strong>
 						</div>
 					
 						<div class="tweet-page-userId">
-							@<%= tweet.tweet_userId %>
+							@<%= tweet.tweet.user.userId %>
 							<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
 						</div>
 							
@@ -167,12 +167,11 @@
 		<% @users.each do |user| %>
 			<div class="follow-all">
 				<div class="follow-image">	
-					<img alt="img" class="img-rounded" height="55" width="55" src="<%= user.image %>" />
+					<%= link_to image_tag( user.image, :size => "55x55", :class => "img-rounded" ), tweet_page_path(user.id) %>
 				</div>
 				<div class="follow-user">
 					<div class="follow-username">
 						<strong><%= link_to user.username, tweet_page_path(user.id) %></strong>
-						
 					</div>
 					<div class="follow-userId">	
 						@<%= user.userId%>
