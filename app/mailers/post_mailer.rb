@@ -1,5 +1,4 @@
 class PostMailer < ApplicationMailer
-
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
@@ -7,12 +6,14 @@ class PostMailer < ApplicationMailer
   #
   default from: "from@example.com"
   
-  def post_mail
-	# @user = User.find(user_id).email
+  def post_mail(tweet_id)
+  
+	user_id = Tweet.find(tweet_id).user_id
 	
-	@greeting = "Hi"
+	@user = User.find(user_id).email
 	
-    mail(to: 'zxc3485@naver.com', subject: 'HELLO')
+	
+    mail(to: @user, subject: 'RETWEET')
 		   
   end
 end

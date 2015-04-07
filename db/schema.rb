@@ -11,7 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319132141) do
+ActiveRecord::Schema.define(version: 20150407053742) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "tweet_id"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "follow_id"
+  end
 
   create_table "likes", force: :cascade do |t|
     t.integer  "tweet_id"
@@ -22,22 +37,35 @@ ActiveRecord::Schema.define(version: 20150319132141) do
 
   add_index "likes", ["tweet_id"], name: "index_likes_on_tweet_id"
 
+  create_table "re_comments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "retweet_id"
+    t.text     "comment"
+    t.integer  "user_id"
+  end
+
+  create_table "re_likes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "retweet_id"
+    t.integer  "user_id"
+  end
+
   create_table "retweets", force: :cascade do |t|
     t.integer  "tweet_id"
-    t.string   "tweet_user_id"
-    t.string   "content"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.string   "image"
-    t.string   "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "username"
+    t.integer  "user_id"
+    t.text     "content"
   end
 
   create_table "tweets", force: :cascade do |t|
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "user_id"
-    t.string   "image"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,6 +83,7 @@ ActiveRecord::Schema.define(version: 20150319132141) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "image"
+    t.string   "userId"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

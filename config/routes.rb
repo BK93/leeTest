@@ -1,14 +1,31 @@
 Rails.application.routes.draw do
   devise_for :users
   
-  get 'welcome/index'
-
   resources :tweets do 
-    resources :retweets
-	resources :likes
+    resources :retweets, only: [:new, :create, :destroy]
+	resources :comments, only: [:new, :create, :destroy]
+	resources :re_comments, only: [:new, :create, :destroy]
+	
+	resources :likes, only: [:create, :destroy]
+	resources :re_likes, only: [:create, :destroy]
+	
+	resources :follows, only: [:create, :destroy]
   end
   
-  root 'welcome#index'
+  resources :tweet_pages, only: [:index, :destroy, :show ]
+  resources :tweet_page_replies, only: [:index]
+  resources :following_pages, only: [:index, :show]
+  resources :followers_pages, only: [:index, :show] 
+  
+  
+  devise_scope :user do
+	root :to => 'devise/sessions#new'
+  end
+
+	
+  # post '/tweets/:tweet_id/likes/:id/toggle' => 'likes#toggle'
+  
+  # root 'tweets#index'
 
   # Example of regular route:
   # get 'products/:id' => 'catalog#view'

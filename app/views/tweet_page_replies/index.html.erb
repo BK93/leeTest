@@ -1,0 +1,259 @@
+<%= stylesheet_link_tag "tweet_pages", :media => "all" %>
+
+<div class="blue">
+		<div class="pink">
+			<img alt="img" class="image" height="180" width="180" src="<%= current_user.image %>" />
+		
+		<h3><%= current_user.username %></h3>
+		@<%= current_user.userId %>
+		
+		</div>
+</div>
+
+<div class="blue-bottom">
+	<div class="blue-buttons">
+		<div class="blue-button">
+			<%= link_to "TWEETS", tweet_pages_path %>
+		
+			<div class="blue-count">	
+				<div class="count-font">
+					<%= @tweets_count %>
+				</div>	
+			</div>
+		</div>
+		
+		<div class="blue-button">
+			<%= link_to "FOLLOWINGS", following_pages_path %>
+		
+			<div class="blue-count">	
+				<div class="count-font">
+					<%= Follow.where(user_id: current_user.id).count %>
+				</div>
+			</div>
+		</div>		
+		
+		<div class="blue-button">		
+			<%= link_to "FOLLOWERS", followers_pages_path %>
+		
+			<div class="blue-count">
+				<div class="count-font">
+					<%= Follow.where(follow_id: current_user.id).count %>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>		
+
+<div class="col-md-3">	
+</div>
+
+<div class="col-md-5">
+	<div class="tweet-page-all">
+		<div class="link-row">
+			<strong><%= link_to "Tweets", tweet_pages_path %></strong>
+			<strong><%= link_to "Tweets & Replies", tweet_page_replies_path %></strong>
+		</div>
+		
+		<!-- 코멘트	-->
+		<% Hash[@comments_hash].values.each do |comment| %>
+			<% if comment.kind_of?(Comment) %>	
+				<hr>
+				<div class="replies-row">
+					<div class="replies-image">
+						<img class="img-rounded" alt="img" height="25" width="25" src="<%= comment.user.image %>" />
+					</div>
+								
+					<div class="replies-right">
+						<div class="center-tweet-right-username">
+							<strong><%= comment.user.username %></strong>
+							@<%= comment.user.userId %>&nbsp・
+							<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+						</div>
+					</div>
+								
+					<div class="replies-right-content">
+						<div class="font">
+							<font color="#4374D9"> 
+								@<%= comment.tweet.user.userId %>
+							</font>
+							&nbsp<%= comment.comment %>
+						</div>
+					</div>
+								
+					<div class="replies-right-delete">
+						<%= link_to tweet_comment_path(comment.tweet_id, comment.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: "Are you sure?" } do %>
+							Delete
+						<% end %>
+					</div>
+				</div>
+			<% else %>
+				<hr>
+				<div class="replies-row">
+					<div class="replies-image">
+						<img class="img-rounded" alt="img" height="25" width="25" src="<%= comment.user.image %>" />
+					</div>
+								
+					<div class="replies-right">
+						<div class="center-tweet-right-username">
+							<strong><%= comment.user.username %></strong>
+							@<%= comment.user.userId %>&nbsp・
+							<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+						</div>
+					</div>
+								
+					<div class="replies-right-content">
+						<div class="font">
+							<font color="#4374D9"> 
+								@<%= comment.retweet.tweet.user.userId %>
+							</font>	
+							&nbsp<%= comment.comment %>
+						</div>
+					</div>
+								
+					<div class="replies-right-delete">
+						<%= link_to tweet_re_comment_path(comment.retweet_id, comment.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: "Are you sure?" } do %>
+							Delete
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+		<% end %>	
+		
+		<% Hash[@tweets_page_hash].values.each do |tweet| %>
+			<div class="tweet-page">
+				<% if tweet.kind_of?(Tweet) %>	
+					<div class="center-tweet">	
+						<div class="tweet-page-image">
+							<img alt="img" class="img-rounded" height="25" width="25" src="<%= tweet.user.image %>" />
+						</div>
+						
+						<div class="tweet-page-right">
+							<div class="tweet-page-username">
+								<strong><%= tweet.user.username %></strong>
+							</div>
+							<div class="tweet-page-userId">
+								@<%= tweet.user.userId %>&nbsp・
+								<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
+							</div>
+							<div class="tweet-page-content">
+								<div class="font">
+									<%= tweet.content %> 
+								</div>
+							</div>
+										
+							<!-- 리플 -->
+							<div class="tweet-page-bt">
+								<%= link_to image_tag("reply_bt.png", :size => "15x15"), new_tweet_comment_path(tweet.id, @tweet) %>
+							</div>
+							<!-- 리트윗 -->
+							<div class="tweet-page-bt">
+								<%= link_to image_tag("retweet_bt.png", :size => "20x20"), new_tweet_retweet_path(tweet.id, @tweet) %>			  
+							</div>		
+							<!-- 라이크 -->							
+							<div class="tweet-page-bt">			
+								<% if Like.new.likable_for?(current_user, tweet) %>
+									<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_like_path(tweet.id, id: tweet.id), :method => :delete %>
+								<% else %>
+									<%= link_to image_tag("favorite_bt2.png", :size => "15x15"), tweet_likes_path(tweet_id: tweet.id), method: :post %>
+								<% end %>
+								<%= tweet.likes.count %>
+							</div>
+							
+							<div class="tweet-page-delete-bt">
+								<%= link_to tweet_page_path(tweet.id), method: :delete, class: "btn btn-default  btn-sm", data: { confirm: "Are you sure?" } do %>
+									Delete
+								<% end %>
+							</div>
+						</div>
+					</div>
+					
+				<% else %>
+				<!-- 리트윗-->
+					<div class="tweet-page-icon">
+						<%= image_tag "retweet_icon.png", size: "15x15" %>
+						<%= tweet.user.username %> retweeted
+					</div>
+					
+					<div class="tweet-page-re-image">
+						<%= link_to image_tag( tweet.tweet.user.image, :size => "25x25", :class => "img-rounded" ), tweet_page_path(tweet.user.id) %>
+					</div>
+						
+					<div class="tweet-page-right">
+						<div class="tweet-page-username">
+							<strong><%= tweet.tweet.user.username %></strong>
+						</div>
+					
+						<div class="tweet-page-userId">
+							@<%= tweet.tweet.user.userId %>
+							<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
+						</div>
+							
+						<div class="tweet-page-content">
+							<div class="font">
+								<%= tweet.content %>
+							</div>
+						</div>
+							
+						<!-- 리플 -->
+						<div class="tweet-page-bt">
+							<%= link_to image_tag("reply_bt.png", :size => "15x15"), new_tweet_comment_path(tweet.tweet_id, @tweet) %>
+						</div>
+						
+						<!-- 리트윗 -->
+						<div class="tweet-page-bt">
+							<%= link_to image_tag("retweet_bt.png", :size => "20x20"), tweet_retweet_path(tweet.tweet_id, tweet.id), method: :delete %>			  
+						</div>
+							
+						<!-- 라이크 -->
+						<div class="tweet-page-bt">
+							<% if ReLike.new.likable_for?(current_user, tweet) %>
+								<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_re_like_path(tweet.id, id: tweet.tweet.id), :method => :delete %>
+							<% else %>
+								<%= link_to image_tag("favorite_bt2.png", :size => "15x15"), tweet_re_likes_path(tweet_id: tweet.id), method: :post %>
+							<% end %>
+							<%= tweet.re_likes.count %>
+						</div>					
+				
+						<div class="tweet-page-delete-bt">
+							<%= link_to "Delete", tweet_retweet_path(tweet.tweet_id, tweet.id), method: :delete, class: "btn btn-default  btn-sm", data: { confirm: "Are you sure?" } %>
+						</div>
+					</div>
+					
+					<% end %>
+			</div>
+		<% end %>
+	</div>
+</div>
+
+
+<div class="col-md-3">
+	<div class="tweet-page-follow-all">
+		
+		<h4>Who to follow</h4>
+	
+		<% @users.each do |user| %>
+			<div class="follow-all">
+				<div class="follow-image">	
+					<%= link_to image_tag( user.image, :size => "55x55", :class => "img-rounded" ), tweet_page_path(user.id) %>
+				</div>
+				<div class="follow-user">
+					<div class="follow-username">
+						<strong><%= link_to user.username, tweet_page_path(user.id) %></strong>
+					</div>
+					<div class="follow-userId">	
+						@<%= user.userId%>
+					</div>
+				</div>
+				
+				<div class="follow-bt">
+					<% if Follow.new.able?(current_user, user) %>		
+						<%= link_to 'UnFollow', tweet_follow_path(user.id, id: current_user.id), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
+					<% else %>
+						<%= link_to 'Follow', tweet_follows_path(tweet_id: user.id), method: :post, class: "btn btn-info btn-sm" %>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+	</div>	
+</div>

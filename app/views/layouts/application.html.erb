@@ -1,20 +1,21 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Test</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag "application_header", :media => "all" %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+ 
 <header>
-  <nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">LeeTest</a>
-	
 	<% if user_signed_in? %>
+	  
+	  <%= link_to image_tag("home.png", :size => "35x35"), tweets_path, class: "navbar-brand" %>
+	  
 	  <div class="navbar-header">
 	    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
@@ -27,37 +28,40 @@
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
        <ul class="nav navbar-nav">
 	    <li>
-	      <%= link_to "twitter", tweets_path %> 
+	      <%#= link_to "Notifications", "#" %> 
 		  <span class="sr-only">
 		    (current)
 		  </span>
-	    </li>
-       
-		<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-		    <img alt="img" height="30" width="30" src="<%= current_user.image %>" />  
-			<%= current_user.username %>
-			<span class="caret"></span>
-		  </a>
-          
-		  <ul class="dropdown-menu" role="menu">
-            <li><a>ID: <%= current_user.id %> | NAME: <%= current_user.username %> | E-mail: <%= current_user.email %></a></li>
-			<li>
-			  <a><%= link_to "LOGOUT", destroy_user_session_path, method: :delete %></a>
-			</li>
-			<li>
-			  <a><%= link_to "profile_update", edit_user_registration_path %></a>
-			</li>
-		  </ul>
-        </li>	
-      </ul>
+	    </li>			
+       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "main", root_path %></li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+				<img alt="img" class="img-rounded" height="35" width="35" src="<%= current_user.image %>" />
+				<span class="caret"></span>
+				&nbsp
+			</a>
+   
+			<ul class="dropdown-menu" role="menu">
+				<li>
+					<a href="/tweet_pages"><h4><strong><%= current_user.username %></strong></h4>
+						<h6>View profile</h6>
+					</a>
+				</li>
+				
+				<li class="divider"></li>
+				<li><%= link_to "Account Settings", edit_user_registration_path %></li>
+				<li><%= link_to "LOGOUT", destroy_user_session_path, method: :delete %></li>
+			</ul>
+        </li>
       </ul>
-      </div>
-		
+      </div> 	
 	<% else %>
+	
+	<a class="navbar-brand" href="/">
+		<%= image_tag "twitter.png", size: "25x20" %>
+	</a>
 	<div class="navbar-header">
 	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -70,32 +74,32 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active">
-            <%= link_to "Login", new_user_session_path %>		  
+            <%#= link_to "Login", new_user_session_path %>		  
 		    <span class="sr-only">(current)</span>
 		</li>
         <li>
-		  <%= link_to "Sign up", new_user_registration_path %>
+		  <%#= link_to "Sign up", new_user_registration_path %>
 		</li>
-      </ul>
-      
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "main", root_path %></li>
       </ul>
     </div>
 	<% end %>
 	
 	</div>
-  </nav>
+</nav>
 </header>
 
 <% flash.each do |name, msg| %>
-  <div class="alert alert-<%= name == "notice" ? "success" : "error" %>">
+  <div class="alert alert-<%= name == "notice" ? "default" : "error" %>">
     <a class="close" data-dismiss="alert">×</a>
     <%= msg %>
   </div>
 <% end %>
 
 <%= yield %>
+		
+<!-- <div class="col-md-3" sidebar_right >
+	<%= yield :sidebar_right %>
+</div> -->
 
 </body>
 </html>

@@ -1,0 +1,199 @@
+
+body{ 
+	background: #C0DEED;
+}
+
+.modal-header{
+	margin-top:10px;
+	position: relative;
+	
+    padding:35px 0px;
+    border-bottom:1px solid #E1E8ED;
+    background-color: #0480be;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.username{
+	h4{
+		# background: #C0DEED;
+		padding-top:40px;
+		margin:0;
+		font-weight:bold;
+	}
+	h6{
+		# background: #C0DEED;
+		padding-top:2px;
+		margin:0;
+		color: #898585;
+	}
+}
+.modal-img-rounded{
+    border:3px solid #ffffff;
+    border-radius: 5px;
+}
+.modal-footer{
+    padding-top:50px;
+    border-bottom:1px solid #E1E8ED;
+    background-color: #ffffff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+	
+	.an{
+		text-align:left;
+		margin-right: 10px;
+		float: left;
+		width: 60px;
+	
+		h6{
+			padding-top:10px;
+			font-size: 10%;
+			margin:0;
+			color: #0480be;
+		}
+		
+		h4{
+			padding-top:5px;
+			margin:0;
+			color: #0480be;
+		}	
+	}	
+}
+   
+
+.col-md-3{
+	padding:0;
+}
+
+.link-row{
+	padding: 10px;
+	
+	strong{
+		font-size: 15px;
+		margin-right: 20px;
+		font-weight: normal ;
+	}
+}
+
+.modal-header-center{
+	margin-top:10px;
+    padding:10px 20px;
+    border-bottom:1px solid #E1E8ED;
+    background-color: #E5F2F7;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}   
+.modal-footer-center{
+    border-bottom:1px solid #E1E8ED;
+    background-color: #ffffff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.col-md-6{
+	margin-bottom: 30px;
+}
+.center-tweet-all{
+	.center-tweet{
+		border-bottom:1px solid #E1E8ED;
+		padding:10px;
+		
+		.center-tweet-image{
+			float: left;
+			margin-right: 10px;
+		}
+		.center-tweet-right{
+			overflow:hidden;
+			
+			.center-tweet-right-username{
+				float: left;
+				padding-right:10px;
+			}
+			.center-tweet-right-userId{
+				margin:0;
+				color: #898585;
+			}
+			.center-tweet-right-content{
+				overflow:hidden;
+				.font{ 
+					margin:0; 
+				}
+			}
+			.center-retweet-right-delete{
+				text-align: right;
+			}
+			
+			.center-tweet-right-bt{
+				padding-top: 5px;
+				float: left;
+				padding-right: 30px;
+			}
+			
+			.center-tweet-right-delete{
+				text-align: right;
+			}	
+		}
+		
+		.center-retweet-icon{
+			# background-color: #FECBFF;
+			padding-left: 25px;
+			padding-bottom: 5px;
+			color: #898585;
+			font-size: 12px;
+		}
+		
+		.center-tweet-right-delete{
+			text-align: right;
+		}
+		
+	}
+}
+
+.modal-right{
+	margin-top:10px;
+	padding: 15px;
+	border:1px solid #E1E8ED;
+    border-bottom:1px solid #E1E8ED;
+    background-color: #ffffff;
+    border-radius: 5px;
+	margin-bottom: 30px;
+	
+	h4{
+		color: #898585;
+		margin: 0;
+	}
+	
+	.follow-all{
+		padding-top:10px;
+		
+		.follow-image{
+			float: left;
+			margin-right: 10px;
+		}
+		.follow-user{
+			.follow-username{
+				float: left;
+				margin-right: 5px;
+			}
+			.follow-userId{
+				color: #898585;
+				# background-color: #14D8C8;
+				font-size: 11px;	
+			}
+		}
+		.follow-bt{
+			margin-top:5px;
+			text-align: left;
+		}
+	}
+	
+}
+
+
+
