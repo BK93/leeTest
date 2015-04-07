@@ -16,7 +16,7 @@ class ReCommentsController < ApplicationController
   end
    
   def destroy
-    @recomment = Recomment.find(params[:id])
+    @recomment = ReComment.find(params[:id])
     @recomment.destroy
 	
     redirect_to tweets_path

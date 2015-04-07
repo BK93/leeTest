@@ -2,7 +2,6 @@ class CreateLikes < ActiveRecord::Migration
   def change
     create_table :likes do |t|
       t.integer :tweet_id
-	  # t.boolean :done, default: false
       t.references :tweet, index: true
       t.timestamps null: false
     end

@@ -1,12 +1,11 @@
-
 <%= stylesheet_link_tag "following_pages", :media => "all" %>
 
 <div class="blue">
 		<div class="pink">
-			<img alt="img" class="image" height="180" width="180" src="<%= current_user.image %>" />
+			<img alt="img" class="image" height="180" width="180" src="<%= @user.image %>" />
 		
-			<h3><%= current_user.username %></h3>
-			@<%= current_user.userId %>
+			<h3><%= @user.username %></h3>
+			@<%= @user.userId %>
 		
 			<div class="follow-page-follow-all">
 			<h4>Who to follow</h4>
@@ -43,10 +42,11 @@
 		</div>
 </div>
 
+
 <div class="blue-bottom">
 	<div class="blue-buttons">
 		<div class="blue-button">
-			<%= link_to "TWEETS", tweet_pages_path %>
+			<%= link_to "TWEETS", tweet_page_path %>
 		
 			<div class="blue-count">	
 				<div class="count-font">
@@ -56,51 +56,52 @@
 		</div>
 		
 		<div class="blue-button">
-			<%= link_to "FOLLOWINGS", following_pages_path %>
+			<%= link_to "FOLLOWINGS", following_page_path %>
 		
 			<div class="blue-count">	
 				<div class="count-font">
-					<%= Follow.where(user_id: current_user.id).count %>
+					<%= Follow.where(user_id: @user.id).count %>
 				</div>
 			</div>
 		</div>		
 		
 		<div class="blue-button">		
-			<%= link_to "FOLLOWERS", followers_pages_path %>
+			<%= link_to "FOLLOWERS", followers_page_path %>
 		
 			<div class="blue-count">
 				<div class="count-font">
-					<%= Follow.where(follow_id: current_user.id).count %>
+					<%= Follow.where(follow_id: @user.id).count %>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>	
 
+
 <div class="col-md-3">
 </div>
 
 <div class="col-md-8">
 	<% Hash[@follower_users_hash].values.each do |user| %> 
-				<div class="col-sm-4">
-					<div class="row">
-						<div class="follow-box-top">
-							<img alt="img" class="follow-box-iamge" height="70" width="70" src="<%= user.image %>" >
-						</div>	
-						<div class="follow-box-bottom">
-							<div class="follow-bt">
-								<% if Follow.new.able?(current_user, user) %>		
-									<%= link_to 'UnFollow', tweet_follow_path(user.id, id: current_user.id), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
-								<% else %>
-									<%= link_to 'Follow', tweet_follows_path(tweet_id: user.id), method: :post, class: "btn btn-info btn-sm" %>
-								<% end %>
-							</div>
-							<h4>
-								<strong><%= user.username %></strong>
-							</h4>
-							<h6>@<%= user.userId %></h6>
-						</div>
+		<div class="col-sm-4">
+			<div class="row">
+				<div class="follow-box-top">
+					<img alt="img" class="follow-box-iamge" height="70" width="70" src="<%= user.image %>" >
+				</div>	
+				<div class="follow-box-bottom">
+				<div class="follow-bt">
+						<% if Follow.new.able?(current_user, user) %>		
+						<%= link_to 'UnFollow', tweet_follow_path(user.id, id: current_user.id), method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure?" } %>
+						<% else %>
+							<%= link_to 'Follow', tweet_follows_path(tweet_id: user.id), method: :post, class: "btn btn-info btn-sm" %>
+						<% end %>
 					</div>
+					<h4>
+						<strong><%= user.username %></strong>
+					</h4>
+					<h6>@<%= user.userId %></h6>
 				</div>
-			<% end %>
+			</div>
+		</div>
+	<% end %>
 </div>

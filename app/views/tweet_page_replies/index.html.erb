@@ -1,6 +1,4 @@
-
 <%= stylesheet_link_tag "tweet_pages", :media => "all" %>
-
 
 <div class="blue">
 		<div class="pink">
@@ -56,35 +54,71 @@
 			<strong><%= link_to "Tweets", tweet_pages_path %></strong>
 			<strong><%= link_to "Tweets & Replies", tweet_page_replies_path %></strong>
 		</div>
+		
 		<!-- 코멘트	-->
-		<% @comments.each do |comment| %>
-		<hr>
-			<div class="replies-row">
-				<div class="replies-image">
-					<img class="img-rounded" alt="img" height="25" width="25" src="<%= comment.image %>" />
-				</div>
-							
-				<div class="replies-right">
-					<div class="center-tweet-right-username">
-						<strong><%= comment.username %></strong>
-						@ <%= comment.created_at %>
+		<% Hash[@comments_hash].values.each do |comment| %>
+			<% if comment.kind_of?(Comment) %>	
+				<hr>
+				<div class="replies-row">
+					<div class="replies-image">
+						<img class="img-rounded" alt="img" height="25" width="25" src="<%= comment.image %>" />
+					</div>
+								
+					<div class="replies-right">
+						<div class="center-tweet-right-username">
+							<strong><%= comment.username %></strong>
+							@<%= comment.userId %>&nbsp・
+							<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+						</div>
+					</div>
+								
+					<div class="replies-right-content">
+						<div class="font">
+							<font color="#4374D9"> 
+								@<%= comment.tweet.tweet_userId %>
+							</font>
+							&nbsp<%= comment.comment %>
+						</div>
+					</div>
+								
+					<div class="replies-right-delete">
+						<%= link_to tweet_comment_path(comment.tweet_id, comment.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: "Are you sure?" } do %>
+							Delete
+						<% end %>
 					</div>
 				</div>
-							
-				<div class="replies-right-content">
-					<div class="font">
-						<%= comment.comment %>
+			<% else %>
+				<hr>
+				<div class="replies-row">
+					<div class="replies-image">
+						<img class="img-rounded" alt="img" height="25" width="25" src="<%= comment.image %>" />
+					</div>
+								
+					<div class="replies-right">
+						<div class="center-tweet-right-username">
+							<strong><%= comment.username %></strong>
+							@<%= comment.userId %>&nbsp・
+							<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %>
+						</div>
+					</div>
+								
+					<div class="replies-right-content">
+						<div class="font">
+							<font color="#4374D9"> 
+								@<%= comment.retweet.tweet_userId %>
+							</font>	
+							&nbsp<%= comment.comment %>
+						</div>
+					</div>
+								
+					<div class="replies-right-delete">
+						<%= link_to tweet_re_comment_path(comment.retweet_id, comment.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: "Are you sure?" } do %>
+							Delete
+						<% end %>
 					</div>
 				</div>
-							
-				<div class="replies-right-delete">
-					<%= link_to tweet_comment_path(comment.tweet_id, comment.id), method: :delete, class: "btn btn-default btn-sm", data: { confirm: "Are you sure?" } do %>
-						Delete
-					<% end %>
-				</div>
-			</div>
-			
-		<% end %>
+			<% end %>
+		<% end %>	
 		
 		<% Hash[@tweets_page_hash].values.each do |tweet| %>
 			<div class="tweet-page">
@@ -100,7 +134,7 @@
 							</div>
 							<div class="tweet-page-userId">
 								@<%= tweet.user.userId %>&nbsp・
-								<%= tweet.created_at %>
+								<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
 							</div>
 							<div class="tweet-page-content">
 								<div class="font">
@@ -152,7 +186,7 @@
 					
 						<div class="tweet-page-userId">
 							@<%= tweet.tweet_userId %>
-							<%= tweet.created_at %>
+							<%= tweet.created_at.strftime('%Y/%m/%d %H:%M') %>
 						</div>
 							
 						<div class="tweet-page-content">
@@ -173,18 +207,20 @@
 							
 						<!-- 라이크 -->
 						<div class="tweet-page-bt">
-							<% if Like.new.likable_for_to?(current_user, tweet) %>
-								<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_like_path(tweet.tweet_id, id: tweet.tweet_id), :method => :delete %>
+							<% if ReLike.new.likable_for?(current_user, tweet) %>
+								<%= link_to image_tag("favorite_bt.png", :size => "15x15"), tweet_re_like_path(tweet.id, id: tweet.tweet.id), :method => :delete %>
 							<% else %>
-								<%= link_to image_tag("favorite_bt2.png", :size => "15x15"), tweet_likes_path(tweet_id: tweet.tweet_id), method: :post %>
+								<%= link_to image_tag("favorite_bt2.png", :size => "15x15"), tweet_re_likes_path(tweet_id: tweet.id), method: :post %>
 							<% end %>
+							<%= tweet.re_likes.count %>
 						</div>					
 				
 						<div class="tweet-page-delete-bt">
 							<%= link_to "Delete", tweet_retweet_path(tweet.tweet_id, tweet.id), method: :delete, class: "btn btn-default  btn-sm", data: { confirm: "Are you sure?" } %>
 						</div>
 					</div>
-				<% end %>
+					
+					<% end %>
 			</div>
 		<% end %>
 	</div>

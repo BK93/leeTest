@@ -7,14 +7,15 @@ Rails.application.routes.draw do
 	resources :re_comments, only: [:new, :create, :destroy]
 	
 	resources :likes, only: [:create, :destroy]
+	resources :re_likes, only: [:create, :destroy]
 	
 	resources :follows, only: [:create, :destroy]
   end
   
-  resources :tweet_pages, only: [:index, :destroy]
+  resources :tweet_pages, only: [:index, :destroy, :show ]
   resources :tweet_page_replies, only: [:index]
-  resources :following_pages, only: [:index]
-  resources :followers_pages, only: [:index] 
+  resources :following_pages, only: [:index, :show]
+  resources :followers_pages, only: [:index, :show] 
   
   
   devise_scope :user do

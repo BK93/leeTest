@@ -9,12 +9,12 @@ class TweetsController < ApplicationController
 		tweet_count = Tweet.where(user_id: current_user.id).count
 		retweet_count = Retweet.where(user_id: current_user.id).count
 		comment_count = Comment.where(user_id: current_user.id).count
-		@tweets_count = tweet_count + retweet_count + comment_count
+		recomment_count = ReComment.where(user_id: current_user.id).count
+		@tweets_count = tweet_count + retweet_count + comment_count + recomment_count
 
 		# 내 트윗, 리트윗
 		own_tweets = current_user.tweets
 		own_retweets = current_user.retweets
-		
 		
 		# 나는 팔로우 목록에서 뺀다
 		@users = User.where.not( id: current_user.id )

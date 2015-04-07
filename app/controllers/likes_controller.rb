@@ -3,15 +3,15 @@ class LikesController < ApplicationController
   
   def create
     if Like.create(tweet_id: params[:tweet_id], user_id: current_user.id)
-	  redirect_to tweets_path
+	  redirect_to :back
     else
-      redirect_to tweets_path
+      redirect_to :back
     end
   end
   
   def destroy
     Like.where(tweet_id: @tweet.id, user_id: current_user.id).first.destroy
-    redirect_to tweets_path
+    redirect_to :back
   end
   
   private
